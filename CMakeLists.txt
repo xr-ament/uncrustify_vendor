@@ -38,6 +38,12 @@ macro(build_uncrustify)
     DESTINATION
       ${CMAKE_INSTALL_PREFIX}
   )
+  install(
+    PROGRAMS
+      ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install/bin/uncrustify
+    DESTINATION
+      ${CMAKE_INSTALL_PREFIX}/bin
+  )
 endmacro()
 
 execute_process(
