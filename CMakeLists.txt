@@ -88,7 +88,7 @@ if(NOT res EQUAL 0)
 else()
   # version of uncrustify before 0.65 user a different versionning scheme so the regex wont be matched
   string(REGEX REPLACE "^Uncrustify-(.*)_f$" "\\1" version_prefix_match "${out}")
-  if(version_prefix_match STREQUAL "" OR version_prefix_match VERSION_LESS 0.66.1)
+  if(version_prefix_match STREQUAL "" OR version_prefix_match VERSION_LESS 0.67)
     set(need_local_build TRUE)
   endif()
 endif()
