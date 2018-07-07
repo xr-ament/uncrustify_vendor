@@ -63,15 +63,8 @@ macro(build_uncrustify)
       ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install/
     DESTINATION
       ${CMAKE_INSTALL_PREFIX}
+    USE_SOURCE_PERMISSIONS
   )
-  if(APPLE)
-    install(
-      PROGRAMS
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install/bin/uncrustify
-      DESTINATION
-        ${CMAKE_INSTALL_PREFIX}/bin
-    )
-  endif()
 endmacro()
 
 execute_process(
