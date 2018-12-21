@@ -44,10 +44,10 @@ macro(build_uncrustify)
     set(patch_exe patch)
   endif()
 
-  # Get uncrustify 0.67.0
-  ExternalProject_Add(uncrustify-0.67
-    URL https://github.com/uncrustify/uncrustify/archive/uncrustify-0.67.tar.gz
-    URL_MD5 5469a25979c6f943a0178e40dabf1c65
+  # Get uncrustify 0.68.1
+  ExternalProject_Add(uncrustify-0.68.1
+    URL https://github.com/uncrustify/uncrustify/archive/uncrustify-0.68.1.tar.gz
+    URL_MD5 8fe72c4caecb39bf5ee0e7ba111adf58
     TIMEOUT 600
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install
@@ -81,13 +81,13 @@ if(NOT res EQUAL 0)
 else()
   # version of uncrustify before 0.65 user a different versionning scheme so the regex wont be matched
   string(REGEX REPLACE "^Uncrustify-(.*)_f$" "\\1" version_prefix_match "${out}")
-  if(version_prefix_match STREQUAL "" OR version_prefix_match VERSION_LESS 0.67)
+  if(version_prefix_match STREQUAL "" OR version_prefix_match VERSION_LESS 0.68)
     set(need_local_build TRUE)
   endif()
 endif()
 if(need_local_build)
   build_uncrustify()
 endif()
-  
+
 # this ensures that the package has an environment hook setting the PATH
 ament_package()
