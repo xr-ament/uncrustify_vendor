@@ -9,7 +9,7 @@
     Wrapper around uncrustify, providing nothing but a dependency on uncrustify, on some systems.
     On others, it provides an ExternalProject build of uncrustify.
   </description>
-  <maintainer email="mikael@osrfoundation.org">Mikael Arguedas</maintainer>
+  <maintainer email="steven@openrobotics.org">Steven! Ragnarök</maintainer>
   <license>Apache License 2.0</license>  <!-- the contents of this package are Apache 2.0 -->
   <license>GNU General Public License v2.0</license>  <!-- uncrustify is GPLv2.0 -->
 
