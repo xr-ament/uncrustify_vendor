@@ -40,11 +40,10 @@ macro(build_uncrustify)
 
   # Pinning to tip of master at the time of a desired bugfix
   set(uncrustify_version 45b836cff040594994d364ad6fd3f04adc890a26)
-  set(uncrustify_version_hash 7cc32ad800c8d639bdf145e2a113a66b)
   # Get uncrustify 0.68.1
   ExternalProject_Add(uncrustify-0.68.1
-    URL https://github.com/uncrustify/uncrustify/archive/${uncrustify_version}.tar.gz
-    URL_MD5 ${uncrustify_version_hash}
+    GIT_REPOSITORY https://github.com/uncrustify/uncrustify.git
+    GIT_TAG ${uncrustify_version}
     TIMEOUT 600
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install
