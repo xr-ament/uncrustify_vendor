@@ -52,6 +52,17 @@ macro(build_uncrustify)
     PATCH_COMMAND
       ${CMAKE_COMMAND} -E chdir <SOURCE_DIR> git apply -p1 --ignore-space-change --whitespace=nowarn ${CMAKE_CURRENT_SOURCE_DIR}/install-patch.diff
   )
+  ExternalProject_Add_Step(uncrustify-0.68.1 forcedownload
+    COMMAND ${CMAKE_COMMAND} -E echo "Forcing the redownload of uncrustify"
+    DEPENDERS download
+  )
+  ExternalProject_Add_Step(uncrustify-0.68.1 purgeBuild
+    COMMAND ${CMAKE_COMMAND} -E remove_directory "<BINARY_DIR>"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "<BINARY_DIR>"
+    COMMENT "Removing previous build results for uncrustify"
+    DEPENDEES download
+    DEPENDERS patch
+  )
 
   # The external project will install to the build folder, but we'll install that on make install.
   install(
