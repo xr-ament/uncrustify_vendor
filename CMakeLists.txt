@@ -49,19 +49,13 @@ macro(build_uncrustify)
       -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install
       ${extra_cmake_args}
       -Wno-dev
-    PATCH_COMMAND
-      ${CMAKE_COMMAND} -E chdir <SOURCE_DIR> git apply -p1 --ignore-space-change --whitespace=nowarn ${CMAKE_CURRENT_SOURCE_DIR}/install-patch.diff
   )
-  ExternalProject_Add_Step(uncrustify-0.68.1 forcedownload
-    COMMAND ${CMAKE_COMMAND} -E echo "Forcing the redownload of uncrustify"
-    DEPENDERS download
-  )
-  ExternalProject_Add_Step(uncrustify-0.68.1 purgeBuild
-    COMMAND ${CMAKE_COMMAND} -E remove_directory "<BINARY_DIR>"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "<BINARY_DIR>"
-    COMMENT "Removing previous build results for uncrustify"
-    DEPENDEES download
-    DEPENDERS patch
+  ExternalProject_Get_Property(uncrustify-0.68.1 STAMP_DIR)
+  ExternalProject_Get_Property(uncrustify-0.68.1 SOURCE_DIR)
+  add_custom_command(APPEND
+    OUTPUT ${STAMP_DIR}/uncrustify-0.68.1-download
+    COMMAND ${CMAKE_COMMAND} -E chdir "${SOURCE_DIR}" git apply -p1 --ignore-space-change --whitespace=nowarn ${CMAKE_CURRENT_SOURCE_DIR}/install-patch.diff
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/install-patch.diff"
   )
 
   # The external project will install to the build folder, but we'll install that on make install.
